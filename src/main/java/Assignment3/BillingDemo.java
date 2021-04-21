@@ -90,8 +90,7 @@ public class BillingDemo extends JFrame {
         
         
         frame.setVisible(true);//make the frame visible
-        //set the default close operations
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //set the default close operations
     }
     
     /* THE MAIN */
