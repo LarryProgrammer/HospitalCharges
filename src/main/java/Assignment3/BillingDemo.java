@@ -94,8 +94,6 @@ public class BillingDemo extends JFrame {
         resultPnl.setLayout(new GridLayout(2, 1));
         resultPnl.add(SubmitBtn);
 
-
-
         /* ADD A TEXT AREA TO DISPLAY */
         displayArea = new JTextArea(20, 30);
         //add the scrollbar in the text area
@@ -160,6 +158,7 @@ public class BillingDemo extends JFrame {
         return output; /*Return the billing details */
     }
 
+    
     /* THE MAIN */
     public static void main(String[] args) {
         BillingDemo gui = new BillingDemo(); //instantiate the GUI
