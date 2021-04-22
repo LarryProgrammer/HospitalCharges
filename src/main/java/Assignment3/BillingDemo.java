@@ -82,19 +82,86 @@ public class BillingDemo extends JFrame {
 /*****************************************************************************/
 
         /* OUTPUT PANEL */
-        
-        //create a panel to display the result
 
         
-        
-        
-        
+        /* ADD A BUTTON */
+        SubmitBtn = new JButton("Submit");
+        SubmitBtn.addActionListener(this);
+
+        //create a panel to display the result
+        JPanel resultPnl = new JPanel();
+        //set the layout of the result panel
+        resultPnl.setLayout(new GridLayout(2, 1));
+        resultPnl.add(SubmitBtn);
+
+
+
+        /* ADD A TEXT AREA TO DISPLAY */
+        displayArea = new JTextArea(20, 30);
+        //add the scrollbar in the text area
+        JScrollPane scrollBar = new JScrollPane(displayArea);
+        scrollBar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollBar.setHorizontalScrollBarPolicy((JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS));
+        resultPnl.add(scrollBar);/* Add the scrollpane with textarea to the panel */
+        contentPane.add(resultPnl);/* Add the panel to the container */
+
         frame.setVisible(true);//make the frame visible
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //set the default close operations
+        //set the default close operations
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-    
+
+    /* Override the actionPreformed method in the ActionListener interface */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        /* get the actionCommand */
+        String actionCommand = e.getActionCommand();
+
+        if(actionCommand.equals("Submit")) {
+            displayArea.append(getInfo() + "\n"); /* call a method for each billing object */
+        }
+    }
+
+    /* define getInfo() method */
+    private String getInfo() {
+        String output = " ";
+
+        /* Get patient and doctor info submitted by the user */
+        String pName, dName, pID, docSpeciality, officeFee;
+        double fee;
+
+        try {
+            pName =patientNameFld.getText();
+            pID = patientIdFld.getText();
+            dName = doctorNameFld.getText();
+            docSpeciality = (String) docBox.getSelectedItem();
+            officeFee = visitFeeFld.getText();
+
+            /* An exception is raised whe user inputs invalid data */
+            if(pName.equals(" ") || pID.equals(" ") || dName.equals(" ")
+                    || docSpeciality.equals(" ") || officeFee.equals(" ")) {
+                throw new Exception("Do not leave the field empty");
+            /* Read the numeric data entered for the visit fees */
+            fee = Double.parseDouble(officeFee);
+            if (fee < 0)
+                throw new Exception("Enter a positive value!!");
+            //create a patient object
+            Patient p = new Patient(pName,pID);
+            //create a doctor object
+            Doctor d = new Doctor(dName,docSpeciality,fee);
+            //create a billing object
+            Billing b = new Billing(d,p);
+
+            //get teh details of the billing object created
+            output = b.getOutput();
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return output; /*Return the billing details */
+    }
+
     /* THE MAIN */
-    public static void main (String [] args) {
+    public static void main(String[] args) {
         BillingDemo gui = new BillingDemo(); //instantiate the GUI
     }
 }
