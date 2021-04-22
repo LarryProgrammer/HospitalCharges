@@ -136,7 +136,7 @@ public class BillingDemo extends JFrame {
 
             /* An exception is raised whe user inputs invalid data */
             if(pName.equals(" ") || pID.equals(" ") || dName.equals(" ")
-                    || docSpeciality.equals(" ") || officeFee.equals(" ")) {
+                    || docSpeciality.equals(" ") || officeFee.equals(" "))
                 throw new Exception("Do not leave the field empty");
             /* Read the numeric data entered for the visit fees */
             fee = Double.parseDouble(officeFee);
@@ -151,7 +151,6 @@ public class BillingDemo extends JFrame {
 
             //get teh details of the billing object created
             output = b.getOutput();
-            }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
