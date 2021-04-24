@@ -96,6 +96,8 @@ public class BillingDemo extends JFrame {
 
         /* ADD A TEXT AREA TO DISPLAY */
         displayArea = new JTextArea(20, 30);
+        //make the JTextArea not editable call the setEditable() method
+        displayArea.setEditable(false);
         //add the scrollbar in the text area
         JScrollPane scrollBar = new JScrollPane(displayArea);
         scrollBar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -149,7 +151,7 @@ public class BillingDemo extends JFrame {
             //create a billing object
             Billing b = new Billing(d,p);
 
-            //get teh details of the billing object created
+            //get the details of the billing object created
             output = b.getOutput();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
